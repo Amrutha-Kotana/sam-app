@@ -4,14 +4,13 @@ phases:
   install:
     commands:
       - npm install
-      #- pip install awscli --upgrade
   pre_build:
     commands:
       - npm run test
       - npm prune --production
   build:
     commands:
-      - aws cloudformation package --template template.yaml --s3-bucket $S3_BUCKET --output-template-file template-export.yml
+      - sam package --template-file template.yaml --s3-bucket $S3_BUCKET --output-template-file template-export.yml
 
 artifacts:
   files:
