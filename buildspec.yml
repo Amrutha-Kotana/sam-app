@@ -3,7 +3,10 @@ version: 0.2
 phases:
   install:
     commands:
-      - pip install aws-sam-cli
+      - curl -Lo aws-sam-cli.zip https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip
+      - unzip aws-sam-cli.zip -d sam-installation
+      - sudo ./sam-installation/install
+      - sam --version
       - npm install
   pre_build:
     commands:
