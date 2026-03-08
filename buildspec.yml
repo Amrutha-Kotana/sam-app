@@ -2,17 +2,15 @@ version: 0.2
 phases:
   install:
     commands:
-      - npm install
       - yum install -y unzip
       - curl -Lo aws-sam-cli.zip https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip
       - unzip aws-sam-cli.zip -d sam-installation
-      - ls sam-installation/
       - sh sam-installation/install
       - sam --version
   pre_build:
     commands:
-      - npm run test
-      - npm prune --production
+      - pip3 install pytest
+      - python3 -m pytest tests/unit/ -v
   build:
     commands:
       - sam package --template-file template.yaml --s3-bucket $S3_BUCKET --output-template-file template-export.yml
