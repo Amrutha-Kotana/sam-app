@@ -1,6 +1,8 @@
 version: 0.2
 phases:
   install:
+    runtime-versions:
+      python: 3.11
     commands:
       - yum install -y unzip
       - curl -Lo aws-sam-cli.zip https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip
@@ -9,7 +11,7 @@ phases:
       - sam --version
   pre_build:
     commands:
-      - pip3 install pytest
+      - python3 -m pip install pytest
       - python3 -m pytest tests/unit/ -v
   build:
     commands:
